@@ -352,13 +352,37 @@ class SearchSpider(scrapy.Spider):
             )
             if info:
                 weibo = WeiboItem()
+
                 weibo['id'] = sel.xpath('@mid').extract_first()
+            
                 weibo['bid'] = sel.xpath(
                     '(.//p[@class="from"])[last()]/a[1]/@href').extract_first(
                     ).split('/')[-1].split('?')[0]
                 weibo['user_id'] = info[0].xpath(
                     'div[2]/a/@href').extract_first().split('?')[0].split(
                         '/')[-1]
+                        
+                '''
+                加一个字段——微博认证：媒体认证、大V认证
+                '''
+                verify=info.xpath("div/a/i[contains(@class,'icon-vip')]/@class").extract()
+                if(len(verify)>0):
+                    if(verify[0]=='icon-vip icon-daren'):
+                        weibo['verify']="微博达人"
+                    elif(verify[0]=="icon-vip icon-vip-g" or verify[0]=="icon-vip icon-vip-y"):
+                        weibo['verify']="微博个人认证"
+                    elif(verify[0]=="icon-vip icon-vip-b"):
+                        weibo['verify']="微博官方认证"
+                    elif(verify[0]=="icon-vip icon-member" or verify[0]=="icon-vip icon-vip-gray"):
+                        weibo["verify"]="微博会员"
+                    else:
+                        weibo['verify']="其他"
+                else:
+                    weibo['verify']="无"
+                '''
+                获取微博认证代码结束
+                '''
+
                 weibo['screen_name'] = info[0].xpath(
                     'div[2]/a/@nick-name').extract_first()
                 txt_sel = sel.xpath('.//p[@class="txt"]')[0]
@@ -516,5 +540,7 @@ class SearchSpider(scrapy.Spider):
                     retweet['retweet_id'] = ''
                     yield {'weibo': retweet, 'keyword': keyword}
                     weibo['retweet_id'] = retweet['id']
+
+
                 print(weibo)
                 yield {'weibo': weibo, 'keyword': keyword}

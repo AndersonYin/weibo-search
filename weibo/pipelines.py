@@ -33,7 +33,7 @@ class CsvPipeline(object):
                 writer = csv.writer(f)
                 if is_first_write:
                     header = [
-                        'id', 'bid', 'user_id', '用户昵称', '微博正文', '头条文章url',
+                        'id','bid', 'user_id', "认证",'用户昵称', '微博正文', '头条文章url',
                         '发布位置', '艾特用户', '话题', '转发数', '评论数', '点赞数', '发布时间',
                         '发布工具', '微博图片url', '微博视频url', 'retweet_id'
                     ]
