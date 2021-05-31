@@ -138,6 +138,7 @@ class MysqlPipeline(object):
                 id varchar(20) NOT NULL,
                 bid varchar(12) NOT NULL,
                 user_id varchar(20),
+                verify varchar(30),
                 screen_name varchar(30),
                 text varchar(2000),
                 article_url varchar(100),
