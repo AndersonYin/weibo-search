@@ -7,7 +7,6 @@
 
 class Cope302:
     def process_response(self,request, response, spider):
-        # print(response)
         # print(response.headers.get('Location'))
         if (response.status==302) and response.headers.get('Location') and ( 'http://captcha.weibo.com/static/waf/check.html'in response.headers.get('Location').decode('utf-8')):
             print("拒绝重定向到 http://captcha.weibo.com/static/waf/check.html，队列重新加入url: ",request.url)

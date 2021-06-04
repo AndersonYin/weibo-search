@@ -23,7 +23,7 @@ ITEM_PIPELINES = {
     # 'weibo.pipelines.MyVideoPipeline': 305
 }
 DOWNLOADER_MIDDLEWARES = {
-   'weibo.middlewares.Cope302': 300,
+   'weibo.middlewares.Cope302': 601,#重定向中间件:600
 }
 # 要搜索的关键词列表，可写多个, 值可以是由关键词或话题组成的列表，也可以是包含关键词的txt文件路径，
 # 如'keyword_list.txt'，txt文件中每个关键词占一行
@@ -37,7 +37,7 @@ CONTAIN_TYPE = 0
 # 具体支持的地名见region.py文件，注意只支持省或直辖市的名字，省下面的市名及直辖市下面的区县名不支持，不筛选请用”全部“
 REGION = ['全部']
 # 搜索的起始日期，为yyyy-mm-dd形式，搜索结果包含该日期
-START_DATE = '2016-05-1'
+START_DATE = '2019-05-1'
 # 搜索的终止日期，为yyyy-mm-dd形式，搜索结果包含该日期
 END_DATE = '2021-05-31'
 # 进一步细分搜索的阈值，若结果页数大于等于该值，则认为结果没有完全展示，细分搜索条件重新搜索以获取更多微博。数值越大速度越快，也越有可能漏掉微博；数值越小速度越慢，获取的微博就越多。
@@ -57,6 +57,6 @@ MYSQL_PASSWORD = ''
 # MYSQL_DATABASE = 'weibo'
 
 # # 阻止302重定向到check.html页面，Cope302:300时，Cope302组件比重复定向组件后使用，所以要禁止REDIRECT_ENABLED
-REDIRECT_ENABLED=False
+# REDIRECT_ENABLED=False
 # 防止302不被处理
 # HTTPERROR_ALLOWED_CODES = [302]
