@@ -1,5 +1,4 @@
 结果文件/
 keyword_list.txt
 **/__pycache__
-crawls/
-weibo/__pycache__/
+crawls
